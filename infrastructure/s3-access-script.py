@@ -2,7 +2,7 @@ import boto3
 import os
 from botocore.exceptions import ClientError
 import math
-#import requests
+import requests
 from dotenv import load_dotenv
 
 load_dotenv()  # Load environment variables from .env file
