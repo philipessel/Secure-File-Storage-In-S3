@@ -42,7 +42,7 @@ variable "cloudtrail_name" {
   type        = string
 }
 
-variable "s3_cloudwatch_log_group" {
+variable "cloudwatch_name" {
   description = "CloudWatch Log Group name"
   type        = string
 }
@@ -53,4 +53,14 @@ variable "sns_topic_name" {
 }
 
 
+variable "cloudtrail_logs_bucket_name" {
+  description = "S3 bucket name for storing CloudTrail logs"
+  type        = string
+}
 
+
+
+variable "cloudtrail_cloudwatch_role_name" {
+  description = "cloudtriail to cloudwatch role name"
+  type        = string
+}

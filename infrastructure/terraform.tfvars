@@ -6,6 +6,9 @@ uploader_role_name = "secure-file-uploader-role"
 viewer_role_name   = "secure-file-viewer-role"
 admin_role_name    = "secure-file-admin-role"
 cloudtrail_name     = "secure-file-cloudtrail"
-s3_cloudwatch_log_group = "s3-secure-file-log"
+cloudwatch_name = "s3-secure-file-log"
 sns_topic_name      = "secure-file-alerts"
 
+cloudtrail_logs_bucket_name = "my-cloudtrail-logs-bucket-philip"
+
+cloudtrail_cloudwatch_role_name = "CloudTrial-Role-For-CloudWach-Logs"

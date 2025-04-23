@@ -174,7 +174,7 @@ if __name__ == "__main__":
     action = input("Enter action (upload/download/admin-upload/admin-download): ").lower()
     filename = input("Enter filename in S3: ")
     role_to_assume = None
-    # ======================================================================== multipart upload starts here.
+    
     if action == "upload":
         role_to_assume = UPLOADER_ROLE_ARN
         credentials = assume_role(role_to_assume)
@@ -228,8 +228,7 @@ if __name__ == "__main__":
                     print(f"Presigned URL for upload: {presigned_url}")
                     print("Use an HTTP PUT request to this URL to upload your file.")
                     print("Example using curl: curl.exe -X PUT -T /path/to/your/local/file \"{}\"".format(presigned_url))
-    # ======================================================================== multipart upload ends here
-    # ======================================================================== download starts here
+    
     elif action == "download":
         role_to_assume = VIEWER_ROLE_ARN
         credentials = assume_role(role_to_assume)
@@ -254,6 +253,6 @@ if __name__ == "__main__":
     else:
         print("Invalid action.")
 
- # ================================================================================== Download ends here==
+
  
  
