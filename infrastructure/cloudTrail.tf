@@ -1,13 +1,12 @@
 resource "aws_cloudtrail" "secure_storage_trail" {
   name                          = var.cloudtrail_name
   s3_bucket_name                = aws_s3_bucket.cloudtrail_logs_bucket.bucket
-  include_global_service_events = false
+  include_global_service_events = true
   is_multi_region_trail         = true
 
-  sns_topic_arn                 = aws_sns_topic.security_alerts.arn 
-
+ 
   cloud_watch_logs_group_arn = "${aws_cloudwatch_log_group.monitoring_logs.arn}:*"
-  cloud_watch_logs_role_arn  = aws_iam_role.cloudtrail_to_cloudwatch_role.arn
+  cloud_watch_logs_role_arn  = aws_iam_role.cloudtrail_cloudwatch_logging_role.arn
 
 
   event_selector {
@@ -20,4 +19,6 @@ resource "aws_cloudtrail" "secure_storage_trail" {
     }
   }
 }
+
+
 

@@ -32,8 +32,10 @@ output "uploader_role_arn" {
 
 output "cloudtrail_name" {
   description = "Name of the CloudTrail trail"
-  value       = aws_cloudtrail.s3_access_trail.name
+  value       = aws_cloudtrail.secure_storage_trail.name
 }
+
+
 
 output "cloudwatch_log_group_name" {
   description = "Name of the CloudWatch log group for monitoring"
