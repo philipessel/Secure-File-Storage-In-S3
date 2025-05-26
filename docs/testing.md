@@ -1,5 +1,3 @@
-
-
 # 🔍 Testing the Application (Running Python Script)
 
 Our Python script contains the logic that allows **Security Token Services (STS)** to assume three main roles:
@@ -32,6 +30,7 @@ We’ll test whether each of these functionalities is working as expected.
 > **Note**: Use files **less than 20MB**. Uploader can only upload via **pre-signed URL**.
 
 ### Steps:
+> **Run**
 ```bash
 python s3-access-script.py
 ```
@@ -59,6 +58,7 @@ Go to your **S3 bucket** in the AWS Console and confirm the file was uploaded.
 > **Note**: Use files **larger than 20MB**.
 
 ### Steps:
+> **Run**
 ```bash
 python s3-access-script.py
 ```
@@ -77,6 +77,7 @@ Check the file in your **S3 bucket** using the AWS Console.
 > **Note**: Viewer can only download via **pre-signed URL**.
 
 ### Steps:
+> **Run**
 ```bash
 python s3-access-script.py
 ```
@@ -92,7 +93,7 @@ curl.exe "PRESIGNED_URL" -o downloaded_file
 > Replace `"PRESIGNED_URL"` with the actual URL.
 
 ### ✅ Verify:
-- The file is saved as `downloaded_file` in the same directory as the script.
+- The file is saved as `downloaded_file` in the same directory where the python script is located.
 - Navigate to the folder and open it to confirm.
 
 ---
@@ -103,6 +104,7 @@ curl.exe "PRESIGNED_URL" -o downloaded_file
 > `upload_file()` from Boto3 handles multi-part upload **automatically** if needed.
 
 ### Steps:
+> **Run**
 ```bash
 python s3-access-script.py
 ```
@@ -120,6 +122,7 @@ Check the file in your **S3 bucket** on the AWS Console.
 > **Note**: Admin downloads are **direct**—no pre-signed URL is used.
 
 ### Steps:
+> **Run**
 ```bash
 python s3-access-script.py
 ```
@@ -128,5 +131,5 @@ python s3-access-script.py
 - The file is downloaded directly.
 
 ### ✅ Verify:
-- The file is saved as `downloaded_file` in the script directory.
+- The file is saved as `downloaded_file` in the same directory where the python script is located.
 - Open the file to confirm its contents.
