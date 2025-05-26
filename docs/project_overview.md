@@ -1,36 +1,51 @@
-## Project Overview
+# Project Overview
 
-The **Secure File Storage in S3** project is a cloud-native solution built on **Amazon Web Services (AWS)** that offers encrypted, auditable, and role-based file storage. It enables three types of users — **Uploaders**, **Viewers**, and **Admins** — to interact securely with an S3 bucket using **pre-signed URLs**. This approach ensures access control without exposing AWS credentials or granting direct access to the bucket.
+This project brings together multiple AWS services and technologies to create a **secure**, **monitored**, and **role-based file storage system**.
 
-Infrastructure is provisioned using **Terraform**, ensuring consistent and automated deployment through Infrastructure as Code (IaC). The system incorporates:
+## 1. Users Authenticate Through IAM Roles
 
-- **AWS Key Management Service (KMS)** for encryption  
-- **AWS CloudTrail** for activity logging  
-- **CloudWatch** with **SNS** for real-time alerts  
+- Users (Uploader, Viewer, Admin) assume their respective IAM roles using **temporary credentials** issued by **AWS STS**.
+- A **Python script** handles role assumption and uses the credentials to request **pre-signed URLs**.
 
-Together, these form a secure and resilient architecture by design.
+## 2. File Access is Performed via Pre-signed URLs
 
-A notable feature is support for **multipart uploads**, allowing large files to be uploaded in smaller, manageable chunks. This improves performance, increases reliability, and enables users to resume uploads if interrupted.
+- Pre-signed URLs are generated using **Boto3** and provide **temporary**, **permission-bound access** to specific S3 objects.
+- **Uploaders** can upload files (including large files via **multi-part upload**) into a **main S3 bucket**.
+- **Viewers** can download files from the main S3 bucket.
+- **Admins** have full control and can both upload and download files.
+
+## 3. Amazon S3 Stores the Files Securely
+
+- The S3 bucket has:
+  - **Public access blocked**
+  - **SSE-KMS encryption**
+  - **Versioning enabled**
+- **Multi-part uploads** ensure efficient transfer of large files.
+
+## 4. Activity is Monitored and Logged
+
+- All operations on the main S3 bucket are tracked by **AWS CloudTrail**.
+  - CloudTrail records API activity and delivers logs to a **dedicated S3 bucket** for log storage.
+- **Amazon CloudWatch Logs** ingest these logs for further analysis.
+
+## 5. Alerts are Triggered for Abnormal Behaviour
+
+- **CloudWatch Insights** queries detect patterns such as repeated failed uploads.
+- **CloudWatch Alarms** are configured based on these metrics.
+- For all API activities in the main S3 bucket, **AWS CloudTrail** triggers **Amazon SNS** to send notifications to administrators for immediate response.
+
+## 6. Terraform Automates the Entire Setup
+
+- All infrastructure is deployed and managed using **Terraform**, including:
+  - S3
+  - IAM roles and policies
+  - KMS keys
+  - CloudTrail
+  - CloudWatch
+  - SNS
+
+This ensures **consistency**, **version control**, and **ease of maintenance**.
 
 ---
 
-## Security at the Core
-
-Security is a foundational principle of this project. Key measures include:
-
-- **IAM roles** with least privilege access to restrict user capabilities  
-- **Pre-signed URLs** to control and limit access to S3 resources by time and operation  
-- **SSE-KMS encryption** for protecting data at rest  
-- **CloudTrail logs** and **CloudWatch alerts** for proactive monitoring and auditing  
-
----
-
-## Real-World Motivation
-
-This project was driven by the growing need for secure file-sharing solutions in industries that handle sensitive information — such as legal, healthcare, and finance.
-
-As someone pursuing a career in **cloud security and automation**, I set out to demonstrate how to design a **secure**, **auditable**, and **scalable** storage system using native AWS services and modern DevOps practices. The result is a solution that prioritizes:
-
-- **Access control**  
-- **Compliance readiness**  
-- **Operational transparency**  
+This architecture ensures that file storage is **secure**, **scalable**, and **monitored**. Users are given **controlled access**, and administrators have **full visibility** into system behaviour.
