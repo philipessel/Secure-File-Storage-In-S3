@@ -225,9 +225,9 @@ if __name__ == "__main__":
                 # Single-part upload as before
                 presigned_url = generate_upload_presigned_url(BUCKET_NAME, filename, credentials)
                 if presigned_url:
-                    print(f"Presigned URL for upload: {presigned_url}")
-                    print("Use an HTTP PUT request to this URL to upload your file.")
-                    print("Example using curl: curl.exe -X PUT -T /path/to/your/local/file \"{}\"".format(presigned_url))
+                    print(f"Copy this Presigned URL for your upload: {presigned_url}")
+                    # print("Use an HTTP PUT request to this URL to upload your file.")
+                    # print("Example using curl: curl.exe -X PUT -T \\path\\to\\your\\local\\file \"{}\"".format(presigned_url))
     
     elif action == "download":
         role_to_assume = VIEWER_ROLE_ARN
@@ -235,9 +235,9 @@ if __name__ == "__main__":
         if credentials:
             presigned_url = generate_download_presigned_url(BUCKET_NAME, filename, credentials)
             if presigned_url:
-                print(f"Presigned URL for download: {presigned_url}")
-                print("Use an HTTP GET request to this URL to download the file.")
-                print("Example using curl: curl.exe \"{}\" -o downloaded_file".format(presigned_url))
+                print(f"Copy this Presigned URL for your download: {presigned_url}")
+                # print("Use an HTTP GET request to this URL to download the file.")
+                # print("Example using curl: curl.exe \"{}\" -o downloaded_file".format(presigned_url))
     elif action == "admin-upload":
         role_to_assume = ADMIN_ROLE_ARN
         credentials = assume_role(role_to_assume)
